@@ -7,27 +7,21 @@
     <style>
         * { box-sizing: border-box; font-family: 'Comic Sans MS', 'Arial', sans-serif; user-select: none; }
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #111424; color: #fff; }
-        
         .screen { position: absolute; top: 0; left: 0; width: 100%; height: 100%; display: none; z-index: 10; }
         .screen.active { display: block; }
-
         #menu-screen { background: linear-gradient(180deg, #1f4068 0%, #111424 100%); overflow: hidden; }
         #canvas-balls { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
-        
         .menu-container { position: relative; z-index: 5; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; }
         h1.title { font-size: 42pt; text-shadow: 4px 4px 0px #e94560, -2px -2px 0px #000; color: #fff; margin-bottom: 30px; text-align: center; animation: pulse 2s infinite; }
         @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.03); } 100% { transform: scale(1); } }
-        
         .menu-buttons { display: flex; flex-direction: column; gap: 15px; width: 320px; }
         .btn-menu { background: #e94560; border: 4px solid #fff; border-radius: 15px; color: #fff; padding: 12px; font-size: 16pt; font-weight: bold; cursor: pointer; box-shadow: 0 8px 0 #951f34; transition: all 0.1s ease; text-align: center; }
         .btn-menu:hover { background: #ff527b; transform: translateY(-2px); box-shadow: 0 10px 0 #951f34; }
         .btn-menu:active { transform: translateY(6px); box-shadow: 0 2px 0 #951f34; }
-
         .modal { display: none; position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); width: 85%; max-width: 500px; background: #16213e; border: 5px solid #fff; border-radius: 20px; padding: 25px; z-index: 100; box-shadow: 0 10px 30px rgba(0,0,0,0.8); }
         .modal h2 { margin-top: 0; color: #e94560; border-bottom: 3px dashed #fff; padding-bottom: 10px; }
         .modal-content { max-height: 300px; overflow-y: auto; font-size: 12pt; line-height: 1.5; margin-bottom: 20px; }
         .close-modal { background: #53354a; color: white; border: 2px solid white; padding: 8px 15px; border-radius: 10px; cursor: pointer; float: right; font-weight: bold; }
-
         #select-screen { background: #1a1a2e; padding: 20px; }
         .select-layout { display: flex; height: 90%; gap: 20px; margin-top: 20px; }
         .select-box { flex: 1; background: #16213e; border: 4px solid #e94560; border-radius: 15px; padding: 20px; overflow-y: auto; }
@@ -35,42 +29,32 @@
         .nation-item:hover { border-color: #fff; background: #144272; }
         .nation-item.locked { opacity: 0.6; cursor: not-allowed; background: #222; }
         .nation-flag-mock { width: 40px; height: 25px; border: 2px solid #fff; border-radius: 3px; display: inline-block; vertical-align: middle; margin-right: 10px; }
-        
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #e94560; }
         .form-group input, .form-group select { width: 100%; padding: 10px; border-radius: 8px; border: none; background: #1a1a2e; color: #fff; font-size: 12pt; border: 2px solid #0f3460; }
         .flag-creator { display: flex; gap: 10px; margin-top: 10px; }
         .color-pick { width: 40px; height: 40px; border-radius: 50%; border: 3px solid #fff; cursor: pointer; }
-
         #game-screen { background: #0f3460; display: flex; flex-direction: column; }
-        
         .top-bar { height: 75px; background: #16213e; border-bottom: 5px solid #e94560; display: flex; align-items: center; justify-content: space-between; padding: 0 20px; z-index: 20; position: relative; }
         .top-left, .top-center, .top-right { display: flex; align-items: center; gap: 15px; }
-        
         .player-ball-hud { width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; position: relative; box-shadow: inset -5px -5px 0 rgba(0,0,0,0.2), 0 4px 6px rgba(0,0,0,0.3); overflow: hidden; }
         .ball-eyes { position: absolute; top: 12px; left: 10px; width: 30px; height: 15px; display: flex; justify-content: space-between; }
         .ball-eye { width: 10px; height: 10px; background: #fff; border-radius: 50%; position: relative; border: 1.5px solid #000; }
         .ball-eye::after { content: ''; position: absolute; width: 4px; height: 4px; background: #000; border-radius: 50%; top: 2px; left: 2px; }
-        
         .hud-sunglasses { position: absolute; top: 10px; left: 5px; width: 40px; height: 12px; background: #000; border-radius: 3px; display: none; z-index: 3; }
         .hud-bandaid { position: absolute; top: 5px; left: 15px; width: 20px; height: 8px; background: #e6b89c; border: 1px solid #b38669; transform: rotate(25deg); display: none; z-index: 3; }
-        
         .stars { color: #555; font-size: 18pt; letter-spacing: 2px; }
         .stars.filled { color: #ffd700; text-shadow: 0 0 5px rgba(255,215,0,0.6); }
         .counter-box { background: #1a1a2e; border: 2px solid #fff; padding: 5px 15px; border-radius: 10px; text-align: center; min-width: 130px; }
         .counter-title { font-size: 9pt; color: #aaa; text-transform: uppercase; }
         .counter-val { font-size: 13pt; font-weight: bold; color: #4e9f3d; }
-        
         .btn-circle { width: 45px; height: 45px; border-radius: 50%; background: #e94560; border: 3px solid #fff; color: white; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 0 #951f34; }
         .btn-circle:active { transform: translateY(3px); box-shadow: 0 1px 0 #951f34; }
-
         .game-layout { flex: 1; display: flex; height: calc(100% - 75px); overflow: hidden; }
-        
         .map-wrapper { flex: 3; display: flex; flex-direction: column; background: #1a1a2e; padding: 15px; gap: 10px; }
         .continent-filters { display: flex; gap: 10px; justify-content: center; }
         .btn-filter { background: #0f3460; border: 2px solid #fff; color: #fff; padding: 5px 15px; border-radius: 8px; cursor: pointer; font-weight: bold; }
         .btn-filter.active { background: #e94560; }
-
         .map-container { flex: 1; overflow-y: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); grid-auto-rows: minmax(130px, auto); gap: 12px; padding: 5px; }
         .map-cell { background: #16213e; border: 3px solid #0f3460; border-radius: 15px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px; cursor: pointer; transition: all 0.2s ease; }
         .map-cell:hover { border-color: #fff; transform: scale(1.03); z-index: 5; }
@@ -78,36 +62,24 @@
         .map-cell.ally-controlled { border-color: #00bcd4; }
         .map-cell.cold-war { animation: alert-border 1.5s infinite; }
         @keyframes alert-border { 0% { border-color: #0f3460; } 50% { border-color: #ff9800; } 100% { border-color: #0f3460; } }
-
         .cell-flag { width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; position: relative; box-shadow: inset -5px -5px 0 rgba(0,0,0,0.2); margin-bottom: 5px; }
         .cell-name { font-weight: bold; font-size: 10pt; text-align: center; text-shadow: 1px 1px 2px #000; }
         .cell-stars { color: #ffd700; font-size: 9pt; margin-top: 2px; }
         .cell-continent { font-size: 7pt; color: #888; text-transform: uppercase; margin-top: 1px; }
-
         .control-panel { flex: 1.3; background: #16213e; border-left: 5px solid #e94560; display: flex; flex-direction: column; overflow-y: auto; padding: 15px; }
         .panel-tab-title { font-size: 15pt; color: #e94560; font-weight: bold; margin-bottom: 15px; text-align: center; border-bottom: 3px solid #0f3460; padding-bottom: 5px; }
-        
         .investment-card { background: #1a1a2e; border: 2px solid #0f3460; border-radius: 10px; padding: 10px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 5px; }
         .inv-info { display: flex; flex-direction: column; }
         .inv-name { font-weight: bold; font-size: 10pt; color: #fff; }
         .inv-level { font-size: 8pt; color: #e94560; }
         .btn-invest { background: #4e9f3d; color: white; border: 2px solid white; padding: 6px 10px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 9pt; white-space: nowrap; }
         .btn-invest:hover { background: #5edc4b; }
-
         .game-toast { position: fixed; bottom: 20px; left: 20px; width: 360px; background: #e94560; border: 4px solid #fff; border-radius: 15px; padding: 15px; z-index: 200; box-shadow: 0 10px 20px rgba(0,0,0,0.5); display: none; animation: slideIn 0.3s ease; }
         @keyframes slideIn { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         .toast-header { display: flex; align-items: center; gap: 10px; font-weight: bold; font-size: 13pt; margin-bottom: 8px; }
         .toast-body { font-size: 11pt; margin-bottom: 12px; line-height: 1.4; }
         .toast-footer { display: flex; gap: 10px; justify-content: flex-end; }
         .btn-toast { padding: 5px 12px; border-radius: 5px; border: 2px solid #fff; font-weight: bold; cursor: pointer; }
-
-        .prop-pizza { width: 16px; height: 16px; background: #ffa500; border-radius: 50% 0 50% 50%; position: absolute; bottom: -2px; right: -5px; border: 1px solid #000; }
-        .prop-baguette { width: 6px; height: 22px; background: #debe92; border-radius: 3px; position: absolute; bottom: 5px; right: -6px; transform: rotate(30deg); border: 1px solid #000; }
-        .prop-mustache { width: 18px; height: 4px; background: #000; position: absolute; bottom: 18px; left: 16px; border-radius: 2px; }
-        .prop-sombrero { width: 34px; height: 10px; background: #ffeb3b; position: absolute; top: -6px; left: 8px; border-radius: 5px 5px 0 0; border: 1px solid #000; }
-        .prop-sombrero::before { content:''; position:absolute; top:-6px; left:9px; width:16px; height:8px; background:#ffeb3b; border-radius:8px 8px 0 0; border:1px solid #000; }
-        .prop-hamburger { width: 16px; height: 14px; background: #964b00; position: absolute; bottom: -2px; right: -4px; border-radius: 4px; border: 1px solid #000; }
-        .prop-monocle { width: 12px; height: 12px; border: 2px solid #ffd700; border-radius: 50%; position: absolute; top: 12px; left: 10px; }
     </style>
 </head>
 <body>
@@ -141,65 +113,44 @@
     <div id="modal-howto" class="modal">
         <h2>Manuale del Presidente</h2>
         <div class="modal-content">
-            <p><strong>Benvenuto leader!</strong> Il tuo paese è sull'orlo del precipizio. Ecco come salvarlo ed espanderti:</p>
+            <p><strong>Leader!</strong> Sviluppa lo Stato e colonizza il globo:</p>
             <ul>
-                <li><strong>Sviluppo:</strong> Investi nei 6 rami strategici nel pannello destro usando fondi e risorse per aumentare la tua potenza.</li>
-                <li><strong>Accordi Commerciali:</strong> Le altre nazioni ti chiederanno risorse. Accetta per guadagnare capitali immensi basati sul loro bisogno geopolitico.</li>
-                <li><strong>Unioni Politiche:</strong> Stringi una catena di patti per annettere pacificamente territori confinanti senza spargimenti di sangue.</li>
-                <li><strong>Guerra e Stelle:</strong> Controlla la forza militare dei rivali (da 1 a 5 stelle). Non attaccare mai da solo chi ha più stelle di te! Sfrutta l'alleanza con la Superpotenza mondiale per vincere guerre impossibili.</li>
-                <li><strong>Guerra Fredda:</strong> Se rifiuti le coalizioni militari degli alleati, preparati a subire sanzioni!</li>
+                <li><strong>Sviluppo:</strong> Investi nei 6 rami nel pannello destro per guadagnare bonus continui.</li>
+                <li><strong>Accordi:</strong> Accetta le richieste estere per sbloccare capitali enormi.</li>
+                <li><strong>Guerra:</strong> Non attaccare mai chi ha più stelle (★) di te senza un alleato potente.</li>
             </ul>
         </div>
         <button class="close-modal" onclick="closeModal('modal-howto')">Chiudi</button>
     </div>
 
     <div id="modal-settings" class="modal">
-        <h2>Impostazioni di Gioco</h2>
+        <h2>Impostazioni</h2>
         <div class="modal-content">
-            <p>Musica di Sfondo: <strong>Disattivata</strong></p>
-            <p>Effetti Sonori: <strong>Attivi</strong></p>
-            <p>Lingua: <strong>Italiano (Stereotipato)</strong></p>
             <button class="btn-menu" style="font-size:11pt;" onclick="clearSave()">Resetta tutti i salvataggi</button>
         </div>
         <button class="close-modal" onclick="closeModal('modal-settings')">Chiudi</button>
     </div>
 
     <div id="select-screen" class="screen">
-        <h2 style="text-align:center; color:#e94560; font-size:24pt; margin:10px 0;">Scegli il destino del tuo Paese</h2>
+        <h2 style="text-align:center; color:#e94560; font-size:24pt; margin:10px 0;">Scegli la tua Nazione</h2>
         <div class="select-layout">
             <div class="select-box">
-                <h3 style="color:#fff; border-bottom:2px solid #e94560;">Nazioni Esistenti Realistiche</h3>
+                <h3 style="color:#fff; border-bottom:2px solid #e94560;">Nazioni Disponibili</h3>
                 <div id="nations-list"></div>
             </div>
             <div class="select-box">
-                <h3 style="color:#fff; border-bottom:2px solid #e94560;">Crea una Nazione da Zero</h3>
+                <h3 style="color:#fff; border-bottom:2px solid #e94560;">Crea Stato Custom</h3>
+                <div class="form-group"><label>Nome dello Stato</label><input type="text" id="custom-name" placeholder="Es. Nuova Atlantide"></div>
                 <div class="form-group">
-                    <label>Nome dello Stato</label>
-                    <input type="text" id="custom-name" placeholder="Es. Nuova Atlantide">
-                </div>
-                <div class="form-group">
-                    <label>Lingua Parlata</label>
-                    <input type="text" id="custom-lang" placeholder="Es. Italico, Anglofono">
-                </div>
-                <div class="form-group">
-                    <label>Territorio Iniziale (km²)</label>
-                    <select id="custom-size">
-                        <option value="15000">Piccolo (15.000 km²)</option>
-                        <option value="50000">Medio (50.000 km²)</option>
-                        <option value="120000">Grande (120.000 km²)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label>Colore Bandiera Principale</label>
+                    <label>Colore Bandiera</label>
                     <div class="flag-creator">
                         <div class="color-pick" style="background:#ff3838;" onclick="pickColor('#ff3838')"></div>
                         <div class="color-pick" style="background:#2ecc71;" onclick="pickColor('#2ecc71')"></div>
                         <div class="color-pick" style="background:#3498db;" onclick="pickColor('#3498db')"></div>
-                        <div class="color-pick" style="background:#9b59b6;" onclick="pickColor('#9b59b6')"></div>
                         <div class="color-pick" style="background:#f1c40f;" onclick="pickColor('#f1c40f')"></div>
                     </div>
                 </div>
-                <button class="btn-menu" style="width:100%; margin-top:20px; background:#4e9f3d; box-shadow:0 6px 0 #2e6f23" onclick="startCustomNation()">Fonda ed Entra in Gioco</button>
+                <button class="btn-menu" style="width:100%; margin-top:20px; background:#4e9f3d; box-shadow:0 6px 0 #2e6f23" onclick="startCustomNation()">Fonda ed Entra</button>
             </div>
         </div>
         <button class="btn-menu" style="position:absolute; bottom:15px; left:20px; font-size:12pt; padding:8px 20px;" onclick="showScreen('menu-screen')">Indietro</button>
@@ -208,39 +159,16 @@
     <div id="game-screen" class="screen">
         <div class="top-bar">
             <div class="top-left">
-                <div class="player-ball-hud" id="hud-ball">
-                    <div class="ball-eyes">
-                        <div class="ball-eye" id="eye-l"></div>
-                        <div class="ball-eye" id="eye-r"></div>
-                    </div>
-                    <div class="hud-sunglasses" id="acc-rich"></div>
-                    <div class="hud-bandaid" id="acc-povero"></div>
-                </div>
-                <div>
-                    <div id="hud-time" style="font-weight:bold; font-size:11pt; color:#ffd700;">Ora: 00:00 | Anno: 2026</div>
-                    <div id="hud-stars" class="stars">★★★★★</div>
-                </div>
+                <div class="player-ball-hud" id="hud-ball"><div class="ball-eyes"><div class="ball-eye" id="eye-l"></div><div class="ball-eye" id="eye-r"></div></div><div class="hud-sunglasses" id="acc-rich"></div><div class="hud-bandaid" id="acc-povero"></div></div>
+                <div><div id="hud-time" style="font-weight:bold; font-size:11pt; color:#ffd700;">Ora: 00:00 | Anno: 2026</div><div id="hud-stars" class="stars">★★★★★</div></div>
             </div>
             <div class="top-center">
-                <div class="counter-box">
-                    <div class="counter-title">Territorio</div>
-                    <div class="counter-val" id="val-size">25.000 km²</div>
-                </div>
-                <div class="counter-box">
-                    <div class="counter-title">Popolazione</div>
-                    <div class="counter-val" id="val-pop" style="color:#00bcd4;">3.400.000</div>
-                </div>
-                <div class="counter-box">
-                    <div class="counter-title">Budget di Stato</div>
-                    <div class="counter-val" id="val-cash" style="color:#ffd700;">$500.000</div>
-                </div>
+                <div class="counter-box"><div class="counter-title">Territorio</div><div class="counter-val" id="val-size">25.000 km²</div></div>
+                <div class="counter-box"><div class="counter-title">Popolazione</div><div class="counter-val" id="val-pop" style="color:#00bcd4;">3.400.000</div></div>
+                <div class="counter-box"><div class="counter-title">Budget</div><div class="counter-val" id="val-cash" style="color:#ffd700;">$500.000</div></div>
             </div>
-            <div class="top-right">
-                <div class="btn-circle" id="btn-speed" onclick="toggleSpeed()">1x</div>
-                <div class="btn-circle" onclick="openModal('modal-settings')">⚙️</div>
-            </div>
+            <div class="top-right"><div class="btn-circle" id="btn-speed" onclick="toggleSpeed()">1x</div><div class="btn-circle" onclick="openModal('modal-settings')">⚙️</div></div>
         </div>
-
         <div class="game-layout">
             <div class="map-wrapper">
                 <div class="continent-filters">
@@ -248,11 +176,9 @@
                     <button class="btn-filter" onclick="filterContinent('america')">America</button>
                     <button class="btn-filter" onclick="filterContinent('europa')">Europa</button>
                     <button class="btn-filter" onclick="filterContinent('asia')">Asia</button>
-                    <button class="btn-filter" onclick="filterContinent('oceania')">Oceania</button>
                 </div>
                 <div class="map-container" id="world-map"></div>
             </div>
-            
             <div class="control-panel">
                 <div class="panel-tab-title">Investimenti Strategici</div>
                 <div id="investments-container"></div>
@@ -263,253 +189,62 @@
     </div>
 
     <div class="game-toast" id="toast-notification">
-        <div class="toast-header">
-            <div class="player-ball-hud" id="toast-ball" style="width:30px; height:30px;"><div class="ball-eyes" style="top:7px; left:4px;"><div class="ball-eye" style="width:7px; height:7px;"></div><div class="ball-eye" style="width:7px; height:7px;"></div></div></div>
-            <span id="toast-title">Accordo Commerciale</span>
-        </div>
+        <div class="toast-header"><div class="player-ball-hud" id="toast-ball" style="width:30px; height:30px;"><div class="ball-eyes" style="top:7px; left:4px;"><div class="ball-eye" style="width:7px; height:7px;"></div><div class="ball-eye" style="width:7px; height:7px;"></div></div></div><span id="toast-title">Accordo Commerciale</span></div>
         <div class="toast-body" id="toast-desc"></div>
         <div class="toast-footer" id="toast-actions"></div>
     </div>
 
     <script>
-        // Background Animato del Menu
-        const canvas = document.getElementById('canvas-balls');
-        const ctx = canvas.getContext('2d');
-        let menuBalls = [];
-        const ballColors = ['#ff3838', '#2ecc71', '#3498db', '#f1c40f', '#9b59b6', '#ffffff'];
-
+        const canvas = document.getElementById('canvas-balls'); const ctx = canvas.getContext('2d');
+        let menuBalls = []; const ballColors = ['#ff3838', '#2ecc71', '#3498db', '#f1c40f', '#ffffff'];
         function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-
-        for(let i=0; i<12; i++) {
-            menuBalls.push({
-                x: Math.random() * window.innerWidth,
-                y: Math.random() * window.innerHeight,
-                radius: Math.random() * 25 + 20,
-                vx: (Math.random() - 0.5) * 4,
-                vy: (Math.random() - 0.5) * 4,
-                color: ballColors[Math.floor(Math.random()*ballColors.length)]
-            });
-        }
-
-        function animateMenu() {
-            if(document.getElementById('menu-screen').classList.contains('active')) {
-                ctx.clearRect(0,0,canvas.width, canvas.height);
-                menuBalls.forEach(b => {
-                    b.x += b.vx; b.y += b.vy;
-                    if(b.x - b.radius < 0 || b.x + b.radius > canvas.width) b.vx *= -1;
-                    if(b.y - b.radius < 0 || b.y + b.radius > canvas.height) b.vy *= -1;
-                    
-                    ctx.beginPath(); ctx.arc(b.x, b.y, b.radius, 0, Math.PI*2);
-                    ctx.fillStyle = b.color; ctx.fill();
-                    ctx.lineWidth = 3; ctx.strokeStyle = '#fff'; ctx.stroke(); ctx.closePath();
-
-                    ctx.fillStyle = '#fff'; ctx.beginPath();
-                    ctx.arc(b.x - b.radius/3, b.y - b.radius/5, b.radius/4, 0, Math.PI*2);
-                    ctx.arc(b.x + b.radius/3, b.y - b.radius/5, b.radius/4, 0, Math.PI*2);
-                    ctx.fill(); ctx.strokeStyle = '#000'; ctx.lineWidth = 1.5; ctx.stroke();
-                });
-            }
-            requestAnimationFrame(animateMenu);
-        }
+        window.addEventListener('resize', resizeCanvas); resizeCanvas();
+        for(let i=0; i<10; i++) { menuBalls.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, radius: Math.random()*20+15, vx: (Math.random()-0.5)*3, vy: (Math.random()-0.5)*3, color: ballColors[Math.floor(Math.random()*ballColors.length)] }); }
+        function animateMenu() { if(document.getElementById('menu-screen').classList.contains('active')) { ctx.clearRect(0,0,canvas.width, canvas.height); menuBalls.forEach(b => { b.x += b.vx; b.y += b.vy; if(b.x-b.radius<0 || b.x+b.radius>canvas.width) b.vx*=-1; if(b.y-b.radius<0 || b.y+b.radius>canvas.height) b.vy*=-1; ctx.beginPath(); ctx.arc(b.x, b.y, b.radius, 0, Math.PI*2); ctx.fillStyle = b.color; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = '#fff'; ctx.stroke(); }); } requestAnimationFrame(animateMenu); }
         animateMenu();
 
-        // Game State Globale resettato
-        let gameDifficulty = "Media";
-        let timeSpeed = 1; 
-        let realSecondsElapsed = 0;
-        let gameYear = 2026;
-        let gameHour = 0;
-        let selectedCustomColor = "#ff3838";
-        let currentContinentFilter = "tutti";
-
-        let playerCountry = {
-            name: "Nazione Protagonista",
-            isPlayer: true,
-            stars: 1,
-            size: 25000,
-            pop: 3400000,
-            cash: 500000,
-            lang: "Italiano",
-            color: "#e0115f",
-            continent: "europa",
-            investments: { militar: 1, cure: 1, agric: 1, science: 1, mechanic: 1, ai: 1 }
-        };
-
-        const ramiInvestimento = [
-            { id: 'militar', name: "Equipaggiamento Militare", cost: 50000 },
-            { id: 'cure', name: "Cure Malattie Rare", cost: 40000 },
-            { id: 'agric', name: "Agricoltura di Massa", cost: 30000 },
-            { id: 'science', name: "Scienza & Laboratori", cost: 60000 },
-            { id: 'mechanic', name: "Meccanica (Auto/Razzi)", cost: 75000 },
-            { id: 'ai', name: "Tecnologia Avanzata (AI)", cost: 100000 }
-        ];
-
+        let gameDifficulty = "Media"; let timeSpeed = 1; let realSecondsElapsed = 0; let gameYear = 2026; let gameHour = 0; let selectedCustomColor = "#ff3838"; let currentContinentFilter = "tutti";
+        let playerCountry = { name: "Italia", isPlayer: true, stars: 1, size: 301340, pop: 59000000, cash: 500000, color: "#009246", continent: "europa", investments: { militar: 1, cure: 1, agric: 1, science: 1, mechanic: 1, ai: 1 } };
+        const ramiInvestimento = [ { id: 'militar', name: "Esercito & Difesa", cost: 50000 }, { id: 'cure', name: "Sanità Pubblica", cost: 40000 }, { id: 'agric', name: "Agricoltura Automatica", cost: 30000 }, { id: 'science', name: "Ricerca Spaziale", cost: 60000 }, { id: 'mechanic', name: "Fabbriche Pesanti", cost: 75000 }, { id: 'ai', name: "Algoritmi AI", cost: 100000 } ];
         let worldNations = [];
         const initialNationsBackup = [
-            // AMERICA
-            { name: "USA", stars: 5, size: 9834000, pop: 331000000, locked: true, color: "#1a365d", prop: "hamburger", continent: "america" },
-            { name: "Brasile", stars: 4, size: 8515767, pop: 213000000, locked: true, color: "#009c3b", prop: "", continent: "america" },
-            { name: "Messico", stars: 4, size: 1964375, pop: 128000000, locked: true, color: "#118151", prop: "sombrero", continent: "america" },
-            { name: "Canada", stars: 3, size: 9984670, pop: 38000000, locked: false, color: "#ff3333", prop: "", continent: "america" },
-            { name: "Argentina", stars: 3, size: 2780400, pop: 45000000, locked: false, color: "#74acdf", prop: "", continent: "america" },
-            { name: "Colombia", stars: 2, size: 1141748, pop: 50000000, locked: false, color: "#f1c40f", prop: "", continent: "america" },
-            { name: "Cile", stars: 2, size: 756102, pop: 19000000, locked: false, color: "#0033a0", prop: "", continent: "america" },
-            { name: "Perù", stars: 2, size: 1285216, pop: 32000000, locked: false, color: "#d91e36", prop: "", continent: "america" },
-            { name: "Venezuela", stars: 2, size: 916445, pop: 28000000, locked: false, color: "#f39c12", prop: "", continent: "america" },
-            { name: "Cuba", stars: 1, size: 109884, pop: 11000000, locked: false, color: "#002a8f", prop: "", continent: "america" },
-            { name: "Panama", stars: 1, size: 75417, pop: 43000000, locked: false, color: "#ffffff", prop: "", continent: "america" },
-            { name: "Uruguay", stars: 1, size: 176215, pop: 3500000, locked: false, color: "#ffffff", prop: "", continent: "america" },
-            { name: "Ecuador", stars: 1, size: 283561, pop: 17000000, locked: false, color: "#eedc00", prop: "", continent: "america" },
-            { name: "Giamaica", stars: 1, size: 10991, pop: 2900000, locked: false, color: "#009b3a", prop: "", continent: "america" },
-            { name: "Costa Rica", stars: 1, size: 51100, pop: 5000000, locked: false, color: "#002f6c", prop: "", continent: "america" },
-            // EUROPA
-            { name: "Francia", stars: 4, size: 643801, pop: 67000000, locked: true, color: "#002395", prop: "baguette", continent: "europa" },
-            { name: "Germania", stars: 4, size: 357022, pop: 83000000, locked: true, color: "#111111", prop: "", continent: "europa" },
-            { name: "Italia", stars: 4, size: 301340, pop: 59000000, locked: true, color: "#009246", prop: "pizza", continent: "europa" },
-            { name: "Inghilterra", stars: 4, size: 242495, pop: 67000000, locked: true, color: "#cf142b", prop: "monocle", continent: "europa" },
-            { name: "Spagna", stars: 4, size: 505990, pop: 47000000, locked: true, color: "#c60b1e", prop: "", continent: "europa" },
-            { name: "Polonia", stars: 3, size: 312696, pop: 38000000, locked: false, color: "#dc143c", prop: "", continent: "europa" },
-            { name: "Ucraina", stars: 3, size: 603500, pop: 41000000, locked: false, color: "#ffd700", prop: "", continent: "europa" },
-            { name: "Paesi Bassi", stars: 3, size: 41543, pop: 17000000, locked: false, color: "#21468b", prop: "", continent: "europa" },
-            { name: "Svezia", stars: 3, size: 450295, pop: 10000000, locked: false, color: "#006aa7", prop: "", continent: "europa" },
-            { name: "Belgio", stars: 2, size: 30689, pop: 11500000, locked: false, color: "#2d2926", prop: "", continent: "europa" },
-            { name: "Svizzera", stars: 2, size: 41285, pop: 8600000, locked: false, color: "#d52b1e", prop: "", continent: "europa" },
-            { name: "Austria", stars: 2, size: 83871, pop: 8900000, locked: false, color: "#ef3340", prop: "", continent: "europa" },
-            { name: "Norvegia", stars: 2, size: 323802, pop: 5400000, locked: false, color: "#ba0c2f", prop: "", continent: "europa" },
-            { name: "Grecia", stars: 2, size: 131957, pop: 10700000, locked: false, color: "#0d5eaf", prop: "", continent: "europa" },
-            { name: "Portogallo", stars: 2, size: 92090, pop: 10200000, locked: false, color: "#ff0000", prop: "", continent: "europa" },
-            { name: "Romania", stars: 2, size: 238391, pop: 19000000, locked: false, color: "#002b7f", prop: "", continent: "europa" },
-            { name: "Irlanda", stars: 2, size: 70273, pop: 4900000, locked: false, color: "#169b62", prop: "", continent: "europa" },
-            { name: "Danimarca", stars: 2, size: 43094, pop: 5800000, locked: false, color: "#c60c30", prop: "", continent: "europa" },
-            { name: "Finlandia", stars: 2, size: 338424, pop: 5500000, locked: false, color: "#003580", prop: "", continent: "europa" },
-            { name: "San Marino", stars: 1, size: 61, pop: 34000, locked: false, color: "#5c9cc4", prop: "", continent: "europa" },
-            // ASIA
-            { name: "Cina", stars: 4, size: 9597000, pop: 1412000000, locked: true, color: "#de2910", prop: "mustache", continent: "asia" },
-            { name: "Russia", stars: 4, size: 17098242, pop: 144000000, locked: true, color: "#ffffff", prop: "", continent: "asia" },
-            { name: "Giappone", stars: 4, size: 377975, pop: 125000000, locked: true, color: "#ffffff", prop: "", continent: "asia" },
-            { name: "India", stars: 4, size: 3287263, pop: 1400000000, locked: true, color: "#ff9933", prop: "", continent: "asia" },
-            { name: "Corea del Sud", stars: 3, size: 100210, pop: 51000000, locked: false, color: "#ffffff", prop: "", continent: "asia" },
-            { name: "Arabia Saudita", stars: 3, size: 2149690, pop: 35000000, locked: false, color: "#006c35", prop: "", continent: "asia" },
-            { name: "Turchia", stars: 3, size: 783562, pop: 84000000, locked: false, color: "#c0392b", prop: "", continent: "asia" },
-            { name: "Indonesia", stars: 3, size: 1904569, pop: 273000000, locked: false, color: "#e74c3c", prop: "", continent: "asia" },
-            { name: "Iran", stars: 2, size: 1648195, pop: 85000000, locked: false, color: "#239b56", prop: "", continent: "asia" },
-            { name: "Pakistan", stars: 2, size: 796095, pop: 225000000, locked: false, color: "#00401a", prop: "", continent: "asia" },
-            { name: "Israele", stars: 2, size: 20770, pop: 9000000, locked: false, color: "#0038a8", prop: "", continent: "asia" },
-            { name: "Vietnam", stars: 2, size: 331210, pop: 97000000, locked: false, color: "#da251d", prop: "", continent: "asia" },
-            { name: "Thailandia", stars: 2, size: 513120, pop: 70000000, locked: false, color: "#a51931", prop: "", continent: "asia" },
-            { name: "Singapore", stars: 2, size: 728, pop: 5700000, locked: false, color: "#ffffff", prop: "", continent: "asia" },
-            { name: "Filippine", stars: 2, size: 300000, pop: 110000000, locked: false, color: "#0038a8", prop: "", continent: "asia" },
-            // OCEANIA
-            { name: "Australia", stars: 4, size: 7692024, pop: 25000000, locked: true, color: "#00008b", prop: "", continent: "oceania" },
-            { name: "Nuova Zelanda", stars: 3, size: 268021, pop: 5000000, locked: false, color: "#00008b", prop: "", continent: "oceania" },
-            { name: "Papua Nuova Guinea", stars: 1, size: 462840, pop: 9000000, locked: false, color: "#ff0000", prop: "", continent: "oceania" },
-            { name: "Figi", stars: 1, size: 18274, pop: 900000, locked: false, color: "#66cdaa", prop: "", continent: "oceania" },
-            { name: "Samoa", stars: 1, size: 2842, pop: 200000, locked: false, color: "#002b7f", prop: "", continent: "oceania" }
+            { name: "USA", stars: 5, size: 9834000, pop: 331000000, color: "#1a365d", continent: "america" },
+            { name: "Brasile", stars: 4, size: 8515767, pop: 213000000, color: "#009c3b", continent: "america" },
+            { name: "Messico", stars: 3, size: 1964375, pop: 128000000, color: "#118151", continent: "america" },
+            { name: "Francia", stars: 4, size: 643801, pop: 67000000, color: "#002395", continent: "europa" },
+            { name: "Germania", stars: 4, size: 357022, pop: 83000000, color: "#111111", continent: "europa" },
+            { name: "Regno Unito", stars: 4, size: 242495, pop: 67000000, color: "#cf142b", continent: "europa" },
+            { name: "Cina", stars: 5, size: 9597000, pop: 1412000000, color: "#de2910", continent: "asia" },
+            { name: "Giappone", stars: 4, size: 377975, pop: 125000000, color: "#ffffff", continent: "asia" },
+            { name: "India", stars: 4, size: 3287263, pop: 1400000000, color: "#ff9933", continent: "asia" },
+            { name: "Australia", stars: 4, size: 7692024, pop: 25000000, color: "#00008b", continent: "oceania" }
         ];
-
-        // Reset completo delle nazioni all'avvio
         worldNations = JSON.parse(JSON.stringify(initialNationsBackup));
 
-        function showScreen(screenId) {
-            document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-            document.getElementById(screenId).classList.add('active');
-            if(screenId === 'select-screen') renderSelectionList();
-            if(screenId === 'game-screen') startupGameEngine();
-        }
-
+        function showScreen(screenId) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById(screenId).classList.add('active'); if(screenId === 'select-screen') renderSelectionList(); if(screenId === 'game-screen') startupGameEngine(); }
         function openModal(id) { document.getElementById(id).style.display = 'block'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-
-        function setDifficulty(level) {
-            gameDifficulty = level;
-            document.getElementById('current-diff-label').innerText = "Attuale: " + level;
-            if(level === "Facile") playerCountry.cash = 600000;
-            if(level === "Impossibile") playerCountry.cash = 200000;
-        }
+        function setDifficulty(level) { gameDifficulty = level; document.getElementById('current-diff-label').innerText = "Attuale: " + level; playerCountry.cash = level === "Facile" ? 750000 : (level === "Impossibile" ? 200000 : 500000); }
 
         function renderSelectionList() {
-            const container = document.getElementById('nations-list');
-            container.innerHTML = "";
+            const container = document.getElementById('nations-list'); container.innerHTML = "";
             worldNations.forEach((nat, idx) => {
-                let item = document.createElement('div');
-                item.className = "nation-item " + (nat.locked ? "locked" : "");
-                item.innerHTML = `
-                    <div>
-                        <div class="nation-flag-mock" style="background:${nat.color}"></div>
-                        <strong>${nat.name}</strong> <span style="font-size:9pt; color:#aaa;">(${nat.continent})</span>
-                    </div>
-                    <span>${nat.locked ? "🔒 Bloccato" : "Gioca ➔"}</span>
-                `;
-                if(!nat.locked) { item.onclick = () => selectExistingNation(idx); }
+                let item = document.createElement('div'); item.className = "nation-item";
+                item.innerHTML = `<div><div class="nation-flag-mock" style="background:${nat.color}"></div><strong>${nat.name}</strong></div><span>Gioca ➔</span>`;
+                item.onclick = () => { playerCountry.name = nat.name; playerCountry.size = nat.size; playerCountry.pop = nat.pop; playerCountry.color = nat.color; playerCountry.stars = nat.stars; playerCountry.continent = nat.continent; worldNations.splice(idx, 1); showScreen('game-screen'); };
                 container.appendChild(item);
             });
         }
+        function pickColor(color) { selectedCustomColor = color; }
+        function startCustomNation() { let name = document.getElementById('custom-name').value.trim() || "Mio Stato"; playerCountry.name = name; playerCountry.color = selectedCustomColor; playerCountry.size = 100000; playerCountry.pop = 5000000; showScreen('game-screen'); }
 
-        function selectExistingNation(index) {
-            let selected = worldNations[index];
-            playerCountry.name = selected.name;
-            playerCountry.size = selected.size;
-            playerCountry.pop = selected.pop;
-            playerCountry.color = selected.color;
-            playerCountry.stars = selected.stars;
-            playerCountry.continent = selected.continent;
-            worldNations.splice(index, 1);
-            showScreen('game-screen');
-        }
-
-        function pickColor(color) {
-            selectedCustomColor = color;
-            document.querySelectorAll('.color-pick').forEach(cp => cp.style.borderColor = "#fff");
-            event.target.style.borderColor = "#000";
-        }
-
-        function startCustomNation() {
-            let name = document.getElementById('custom-name').value.trim();
-            let lang = document.getElementById('custom-lang').value.trim();
-            let size = parseInt(document.getElementById('custom-size').value);
-            
-            if(!name) name = "Nuovo Stato Custom";
-            if(!lang) lang = "Nativo";
-            
-            playerCountry.name = name; playerCountry.lang = lang; playerCountry.size = size;
-            playerCountry.color = selectedCustomColor; playerCountry.pop = Math.floor(size * 75); 
-            playerCountry.stars = 1; playerCountry.continent = "europa";
-
-            showScreen('game-screen');
-        }
-
-        // Loop di Gioco Garantito
         let gameInterval;
         function startupGameEngine() {
-            document.getElementById('hud-ball').style.backgroundColor = playerCountry.color;
-            
-            updateHUD();
-            buildWorldMap();
-            renderInvestments();
-
+            document.getElementById('hud-ball').style.backgroundColor = playerCountry.color; updateHUD(); buildWorldMap(); renderInvestments();
             if(gameInterval) clearInterval(gameInterval);
             gameInterval = setInterval(() => {
-                realSecondsElapsed += timeSpeed;
-                gameHour += timeSpeed * 2;
-                if(gameHour >= 24) gameHour = 0;
-                
-                if(realSecondsElapsed % 3 === 0) {
-                    let profit = (playerCountry.investments.agric * 1500) + (playerCountry.investments.ai * 5000);
-                    playerCountry.cash += Math.floor(profit * (gameDifficulty === "Facile" ? 1.5 : 1));
-                    
-                    if(playerCountry.investments.cure >= 2) {
-                        playerCountry.pop += Math.floor(Math.random() * 450);
-                    } else {
-                        playerCountry.pop -= Math.floor(Math.random() * 200); 
-                    }
-                    
-                    updateHUD();
-                    checkRandomEvents();
-                }
-
-                if(realSecondsElapsed >= 1200) { realSecondsElapsed = 0; gameYear++; }
+                realSecondsElapsed += timeSpeed; gameHour += timeSpeed; if(gameHour >= 24) gameHour = 0;
+                if(realSecondsElapsed % 3 === 0) { playerCountry.cash += Math.floor((playerCountry.investments.agric * 2000 + playerCountry.investments.ai * 4000) * (gameDifficulty === "Facile" ? 1.5 : 1)); updateHUD(); if(Math.random() < 0.15) checkRandomEvents(); }
                 document.getElementById('hud-time').innerText = `Ora: ${gameHour}:00 | Anno: ${gameYear}`;
             }, 1000);
         }
@@ -518,238 +253,54 @@
             document.getElementById('val-size').innerText = playerCountry.size.toLocaleString() + " km²";
             document.getElementById('val-pop').innerText = playerCountry.pop.toLocaleString();
             document.getElementById('val-cash').innerText = "$" + playerCountry.cash.toLocaleString();
-            
-            if (playerCountry.size > 8000000 && playerCountry.investments.militar >= 4) playerCountry.stars = 4;
-            else if (playerCountry.size > 1500000) playerCountry.stars = 3;
-            else if (playerCountry.size > 200000) playerCountry.stars = 2;
-            else playerCountry.stars = 1;
-
-            let usaAlive = worldNations.find(n => n.name === "USA");
-            if(playerCountry.size > 15000000 && playerCountry.stars >= 4 && (!usaAlive || playerCountry.size > usaAlive.size)) {
-                playerCountry.stars = 5;
-                alert("COMPLIMENTI! Sei la Superpotenza Globale! HAI VINTO!");
-            }
-
-            let starString = "★".repeat(playerCountry.stars) + "☆".repeat(5 - playerCountry.stars);
-            document.getElementById('hud-stars').innerText = starString;
-
-            let richAcc = document.getElementById('acc-rich');
-            let poorAcc = document.getElementById('acc-povero');
-            let eyeL = document.getElementById('eye-l');
-
-            if(playerCountry.cash > 1000000) {
-                richAcc.style.display = "block"; poorAcc.style.display = "none";
-                eyeL.style.borderRadius = "0"; eyeL.style.height = "4px"; 
-            } else if (playerCountry.pop < 1000000 || playerCountry.cash < 50000) {
-                richAcc.style.display = "none"; poorAcc.style.display = "block"; 
-                eyeL.style.borderRadius = "50%"; eyeL.style.height = "10px";
-            } else {
-                richAcc.style.display = "none"; poorAcc.style.display = "none";
-                eyeL.style.borderRadius = "50%"; eyeL.style.height = "10px";
-            }
+            document.getElementById('hud-stars').innerText = "★".repeat(playerCountry.stars) + "☆".repeat(5-playerCountry.stars);
         }
-
-        function toggleSpeed() {
-            if(timeSpeed === 1) timeSpeed = 3;
-            else if(timeSpeed === 3) timeSpeed = 10;
-            else timeSpeed = 1;
-            document.getElementById('btn-speed').innerText = timeSpeed + "x";
-        }
-
-        function filterContinent(continent) {
-            currentContinentFilter = continent;
-            document.querySelectorAll('.btn-filter').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            buildWorldMap();
-        }
+        function toggleSpeed() { timeSpeed = timeSpeed === 1 ? 3 : (timeSpeed === 3 ? 10 : 1); document.getElementById('btn-speed').innerText = timeSpeed + "x"; }
+        function filterContinent(c) { currentContinentFilter = c; buildWorldMap(); }
 
         function buildWorldMap() {
-            const map = document.getElementById('world-map');
-            map.innerHTML = "";
-
+            const map = document.getElementById('world-map'); map.innerHTML = "";
             if(currentContinentFilter === "tutti" || playerCountry.continent === currentContinentFilter) {
-                let pCell = document.createElement('div');
-                pCell.className = "map-cell player-controlled";
-                pCell.innerHTML = `
-                    <div class="cell-flag" style="background:${playerCountry.color}"></div>
-                    <div class="cell-name">${playerCountry.name} (TU)</div>
-                    <div class="cell-stars">${'★'.repeat(playerCountry.stars)}</div>
-                    <div class="cell-continent">${playerCountry.continent}</div>
-                `;
+                let pCell = document.createElement('div'); pCell.className = "map-cell player-controlled";
+                pCell.innerHTML = `<div class="cell-flag" style="background:${playerCountry.color}"></div><div class="cell-name">${playerCountry.name} (TU)</div>`;
                 map.appendChild(pCell);
             }
-
             worldNations.forEach((nat, idx) => {
                 if(currentContinentFilter !== "tutti" && nat.continent !== currentContinentFilter) return;
-
-                let cell = document.createElement('div');
-                cell.className = "map-cell";
-                if(nat.coldWarActive) cell.classList.add('cold-war');
-                if(nat.isAlly) cell.classList.add('ally-controlled');
-
-                cell.innerHTML = `
-                    <div class="cell-flag" style="background:${nat.color}">
-                        ${nat.prop === 'pizza' ? '<div class="prop-pizza"></div>' : ''}
-                        ${nat.prop === 'baguette' ? '<div class="prop-baguette"></div>' : ''}
-                        ${nat.prop === 'mustache' ? '<div class="prop-mustache"></div>' : ''}
-                        ${nat.prop === 'sombrero' ? '<div class="prop-sombrero"></div>' : ''}
-                        ${nat.prop === 'hamburger' ? '<div class="prop-hamburger"></div>' : ''}
-                        ${nat.prop === 'monocle' ? '<div class="prop-monocle"></div>' : ''}
-                    </div>
-                    <div class="cell-name">${nat.name}</div>
-                    <div class="cell-stars">${'★'.repeat(nat.stars)}</div>
-                    <div class="cell-continent">${nat.continent}</div>
-                `;
-                cell.onclick = () => interactWithNation(idx);
+                let cell = document.createElement('div'); cell.className = "map-cell";
+                cell.innerHTML = `<div class="cell-flag" style="background:${nat.color}"></div><div class="cell-name">${nat.name}</div><div class="cell-stars">${'★'.repeat(nat.stars)}</div>`;
+                cell.onclick = () => {
+                    let cost = nat.stars * 80000;
+                    if(confirm(`Vuoi comprare/annettere commercialmente ${nat.name} per $${cost.toLocaleString()}?`)) {
+                        if(playerCountry.cash >= cost) { playerCountry.cash -= cost; playerCountry.size += nat.size; playerCountry.pop += nat.pop; worldNations.splice(idx, 1); buildWorldMap(); updateHUD(); } else { alert("Fondi insufficienti!"); }
+                    }
+                };
                 map.appendChild(cell);
             });
         }
 
         function renderInvestments() {
-            const container = document.getElementById('investments-container');
-            container.innerHTML = "";
+            const container = document.getElementById('investments-container'); container.innerHTML = "";
             ramiInvestimento.forEach(inv => {
-                let currentLvl = playerCountry.investments[inv.id];
-                let currentCost = inv.cost * currentLvl;
-                
-                let card = document.createElement('div');
-                card.className = "investment-card";
-                card.innerHTML = `
-                    <div class="inv-info">
-                        <span class="inv-name">${inv.name}</span>
-                        <span class="inv-level">Livello: ${currentLvl}</span>
-                    </div>
-                    <button class="btn-invest" onclick="buyInvestment('${inv.id}', ${currentCost})">Migliora ($${currentCost.toLocaleString()})</button>
-                `;
+                let lvl = playerCountry.investments[inv.id]; let cost = inv.cost * lvl;
+                let card = document.createElement('div'); card.className = "investment-card";
+                card.innerHTML = `<div class="inv-info"><span class="inv-name">${inv.name}</span><span class="inv-level">Livello: ${lvl}</span></div><button class="btn-invest" onclick="buyInvestment('${inv.id}', ${cost})">Migliora ($${cost})</button>`;
                 container.appendChild(card);
             });
         }
-
-        function buyInvestment(id, cost) {
-            if(playerCountry.cash >= cost) {
-                playerCountry.cash -= cost;
-                playerCountry.investments[id]++;
-                renderInvestments();
-                updateHUD();
-            } else {
-                alert("Fondi Insufficienti!");
-            }
-        }
-
-        function interactWithNation(idx) {
-            let target = worldNations[idx];
-            let optionsHtml = `
-                <p>Continente: <strong>${target.continent.toUpperCase()}</strong></p>
-                <p>Potenza Militare: ${'★'.repeat(target.stars)}</p>
-                <p>Territorio: ${target.size.toLocaleString()} km²</p>
-                <button class="btn-menu" style="font-size:11pt; margin-bottom:5px; background:#4e9f3d;" onclick="proposeTrade(${idx})">Commercializza</button>
-                <button class="btn-menu" style="font-size:11pt; margin-bottom:5px; background:#00bcd4;" onclick="proposeUnion(${idx})">Unione Politica</button>
-                <button class="btn-menu" style="font-size:11pt; background:#f44336;" onclick="declareWar(${idx})">Dichiara Guerra</button>
-            `;
-            
-            let interModal = document.createElement('div');
-            interModal.id = "inter-modal"; interModal.className = "modal"; interModal.style.display = "block";
-            interModal.innerHTML = `
-                <h2>Diplomazia con ${target.name}</h2>
-                <div class="modal-content">${optionsHtml}</div>
-                <button class="close-modal" onclick="document.body.removeChild(document.getElementById('inter-modal'))">Chiudi</button>
-            `;
-            document.body.appendChild(interModal);
-        }
-
-        function proposeTrade(idx) {
-            let target = worldNations[idx];
-            document.body.removeChild(document.getElementById('inter-modal'));
-            let successRate = target.stars > playerCountry.stars ? 25 : 65;
-
-            if(Math.random() * 100 <= successRate) {
-                let reward = 120000 * playerCountry.investments.science;
-                playerCountry.cash += reward;
-                alert(`Accordo riuscito con ${target.name}! Guadagnati $${reward.toLocaleString()}`);
-            } else {
-                alert("Accordo rifiutato.");
-            }
-            updateHUD();
-        }
-
-        function proposeUnion(idx) {
-            let target = worldNations[idx];
-            document.body.removeChild(document.getElementById('inter-modal'));
-
-            if(playerCountry.investments.ai >= 3 && playerCountry.cash > 250000 && target.stars <= playerCountry.stars) {
-                playerCountry.size += target.size; playerCountry.pop += target.pop; playerCountry.cash -= 150000;
-                alert(`Annessione pacifica riuscita! ${target.name} si è unito al tuo territorio.`);
-                worldNations.splice(idx, 1); buildWorldMap(); updateHUD();
-            } else {
-                alert("Unione fallita. Potenziati ancora in Tecnologia/AI (Livello 3 minimo).");
-            }
-        }
-
-        function declareWar(idx) {
-            let target = worldNations[idx];
-            document.body.removeChild(document.getElementById('inter-modal'));
-            let usa = worldNations.find(n => n.name === "USA");
-            let alliedWithSuperpower = usa && usa.isAlly;
-
-            if (playerCountry.stars < target.stars && !alliedWithSuperpower) {
-                playerCountry.cash = Math.floor(playerCountry.cash / 2);
-                playerCountry.pop = Math.floor(playerCountry.pop * 0.8);
-                alert("Sconfitta militare!");
-            } else {
-                playerCountry.size += Math.floor(target.size * 0.6);
-                playerCountry.pop += Math.floor(target.pop * 0.5);
-                alert(`Vittoria! Hai conquistato ${target.name}`);
-                worldNations.splice(idx, 1);
-            }
-            buildWorldMap(); updateHUD();
-        }
+        function buyInvestment(id, cost) { if(playerCountry.cash >= cost) { playerCountry.cash -= cost; playerCountry.investments[id]++; renderInvestments(); updateHUD(); } else { alert("Soldi insufficienti!"); } }
 
         function checkRandomEvents() {
-            if(Math.random() * 100 > 15) return;
-            let randomNat = worldNations[Math.floor(Math.random() * worldNations.length)];
-            if(!randomNat) return;
-
-            let toast = document.getElementById('toast-notification');
-            let tBall = document.getElementById('toast-ball');
-            let title = document.getElementById('toast-title');
-            let desc = document.getElementById('toast-desc');
-            let footer = document.getElementById('toast-actions');
-
-            tBall.style.backgroundColor = randomNat.color;
-            title.innerText = `Richiesta da ${randomNat.name}`;
-            desc.innerText = `${randomNat.name} vuole acquistare aiuti tecnologici immediati in cambio di $100.000 cash.`;
-            footer.innerHTML = `
-                <button class="btn-toast" style="background:#4e9f3d; color:#fff;" onclick="acceptIncomingTrade(100000)">Vendi</button>
-                <button class="btn-toast" style="background:#f44336; color:#fff;" onclick="closeToast()">Rifiuta</button>
-            `;
-            toast.style.display = "block";
+            let randomNat = worldNations[Math.floor(Math.random() * worldNations.length)]; if(!randomNat) return;
+            document.getElementById('toast-desc').innerText = `${randomNat.name} ti propone un patto commerciale. Guadagni subito $80.000!`;
+            document.getElementById('toast-actions').innerHTML = `<button class="btn-toast" style="background:#4e9f3d; color:#fff;" onclick="playerCountry.cash+=80000; closeToast(); updateHUD();">Accetta</button>`;
+            document.getElementById('toast-notification').style.display = "block";
         }
-
-        function acceptIncomingTrade(amount) { playerCountry.cash += amount; closeToast(); updateHUD(); }
         function closeToast() { document.getElementById('toast-notification').style.display = "none"; }
-
-        function saveGame() {
-            let saveData = { playerCountry: playerCountry, worldNations: worldNations, gameYear: gameYear, gameDifficulty: gameDifficulty };
-            localStorage.setItem('countryball_strategy_save', JSON.stringify(saveData));
-            alert("Partita salvata localmente!");
-        }
-
-        function loadGame() {
-            let local = localStorage.getItem('countryball_strategy_save');
-            if(!local) { alert("Nessun salvataggio trovato."); return; }
-            let parsed = JSON.parse(local);
-            playerCountry = parsed.playerCountry; worldNations = parsed.worldNations;
-            gameYear = parsed.gameYear; gameDifficulty = parsed.gameDifficulty;
-            showScreen('game-screen');
-        }
-
-        function resetToMenu() {
-            if(gameInterval) clearInterval(gameInterval);
-            worldNations = JSON.parse(JSON.stringify(initialNationsBackup));
-            showScreen('menu-screen');
-        }
-
-        function clearSave() { localStorage.removeItem('countryball_strategy_save'); alert("Salvataggi azzerati."); resetToMenu(); }
+        function saveGame() { localStorage.setItem('cb_save', JSON.stringify({playerCountry, worldNations})); alert("Salvato!"); }
+        function loadGame() { let s = localStorage.getItem('cb_save'); if(s) { let p = JSON.parse(s); playerCountry = p.playerCountry; worldNations = p.worldNations; showScreen('game-screen'); } else { alert("Nessun salvataggio."); } }
+        function resetToMenu() { if(gameInterval) clearInterval(gameInterval); worldNations = JSON.parse(JSON.stringify(initialNationsBackup)); showScreen('menu-screen'); }
+        function clearSave() { localStorage.removeItem('cb_save'); alert("Salvataggio pulito."); resetToMenu(); }
     </script>
 </body>
 </html>
