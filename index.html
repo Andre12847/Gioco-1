@@ -27,7 +27,6 @@
         .select-box { flex: 1; background: #16213e; border: 4px solid #e94560; border-radius: 15px; padding: 20px; overflow-y: auto; }
         .nation-item { display: flex; align-items: center; justify-content: space-between; background: #0f3460; padding: 12px; margin-bottom: 10px; border-radius: 10px; border: 2px solid transparent; cursor: pointer; }
         .nation-item:hover { border-color: #fff; background: #144272; }
-        .nation-item.locked { opacity: 0.6; cursor: not-allowed; background: #222; }
         .nation-flag-mock { width: 40px; height: 25px; border: 2px solid #fff; border-radius: 3px; display: inline-block; vertical-align: middle; margin-right: 10px; }
         .form-group { margin-bottom: 15px; }
         .form-group label { display: block; font-weight: bold; margin-bottom: 5px; color: #e94560; }
@@ -41,15 +40,10 @@
         .ball-eyes { position: absolute; top: 12px; left: 10px; width: 30px; height: 15px; display: flex; justify-content: space-between; }
         .ball-eye { width: 10px; height: 10px; background: #fff; border-radius: 50%; position: relative; border: 1.5px solid #000; }
         .ball-eye::after { content: ''; position: absolute; width: 4px; height: 4px; background: #000; border-radius: 50%; top: 2px; left: 2px; }
-        .hud-sunglasses { position: absolute; top: 10px; left: 5px; width: 40px; height: 12px; background: #000; border-radius: 3px; display: none; z-index: 3; }
-        .hud-bandaid { position: absolute; top: 5px; left: 15px; width: 20px; height: 8px; background: #e6b89c; border: 1px solid #b38669; transform: rotate(25deg); display: none; z-index: 3; }
-        .stars { color: #555; font-size: 18pt; letter-spacing: 2px; }
-        .stars.filled { color: #ffd700; text-shadow: 0 0 5px rgba(255,215,0,0.6); }
         .counter-box { background: #1a1a2e; border: 2px solid #fff; padding: 5px 15px; border-radius: 10px; text-align: center; min-width: 130px; }
         .counter-title { font-size: 9pt; color: #aaa; text-transform: uppercase; }
         .counter-val { font-size: 13pt; font-weight: bold; color: #4e9f3d; }
         .btn-circle { width: 45px; height: 45px; border-radius: 50%; background: #e94560; border: 3px solid #fff; color: white; font-weight: bold; display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 0 #951f34; }
-        .btn-circle:active { transform: translateY(3px); box-shadow: 0 1px 0 #951f34; }
         .game-layout { flex: 1; display: flex; height: calc(100% - 75px); overflow: hidden; }
         .map-wrapper { flex: 3; display: flex; flex-direction: column; background: #1a1a2e; padding: 15px; gap: 10px; }
         .continent-filters { display: flex; gap: 10px; justify-content: center; }
@@ -59,27 +53,16 @@
         .map-cell { background: #16213e; border: 3px solid #0f3460; border-radius: 15px; position: relative; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 8px; cursor: pointer; transition: all 0.2s ease; }
         .map-cell:hover { border-color: #fff; transform: scale(1.03); z-index: 5; }
         .map-cell.player-controlled { border-color: #4e9f3d; background: #1f4068; box-shadow: 0 0 10px rgba(78,159,61,0.4); }
-        .map-cell.ally-controlled { border-color: #00bcd4; }
-        .map-cell.cold-war { animation: alert-border 1.5s infinite; }
-        @keyframes alert-border { 0% { border-color: #0f3460; } 50% { border-color: #ff9800; } 100% { border-color: #0f3460; } }
-        .cell-flag { width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; position: relative; box-shadow: inset -5px -5px 0 rgba(0,0,0,0.2); margin-bottom: 5px; }
+        .cell-flag { width: 50px; height: 50px; border-radius: 50%; border: 3px solid #fff; position: relative; margin-bottom: 5px; }
         .cell-name { font-weight: bold; font-size: 10pt; text-align: center; text-shadow: 1px 1px 2px #000; }
         .cell-stars { color: #ffd700; font-size: 9pt; margin-top: 2px; }
-        .cell-continent { font-size: 7pt; color: #888; text-transform: uppercase; margin-top: 1px; }
         .control-panel { flex: 1.3; background: #16213e; border-left: 5px solid #e94560; display: flex; flex-direction: column; overflow-y: auto; padding: 15px; }
         .panel-tab-title { font-size: 15pt; color: #e94560; font-weight: bold; margin-bottom: 15px; text-align: center; border-bottom: 3px solid #0f3460; padding-bottom: 5px; }
         .investment-card { background: #1a1a2e; border: 2px solid #0f3460; border-radius: 10px; padding: 10px; margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; gap: 5px; }
         .inv-info { display: flex; flex-direction: column; }
         .inv-name { font-weight: bold; font-size: 10pt; color: #fff; }
         .inv-level { font-size: 8pt; color: #e94560; }
-        .btn-invest { background: #4e9f3d; color: white; border: 2px solid white; padding: 6px 10px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 9pt; white-space: nowrap; }
-        .btn-invest:hover { background: #5edc4b; }
-        .game-toast { position: fixed; bottom: 20px; left: 20px; width: 360px; background: #e94560; border: 4px solid #fff; border-radius: 15px; padding: 15px; z-index: 200; box-shadow: 0 10px 20px rgba(0,0,0,0.5); display: none; animation: slideIn 0.3s ease; }
-        @keyframes slideIn { from { transform: translateY(100px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-        .toast-header { display: flex; align-items: center; gap: 10px; font-weight: bold; font-size: 13pt; margin-bottom: 8px; }
-        .toast-body { font-size: 11pt; margin-bottom: 12px; line-height: 1.4; }
-        .toast-footer { display: flex; gap: 10px; justify-content: flex-end; }
-        .btn-toast { padding: 5px 12px; border-radius: 5px; border: 2px solid #fff; font-weight: bold; cursor: pointer; }
+        .btn-invest { background: #4e9f3d; color: white; border: 2px solid white; padding: 6px 10px; border-radius: 8px; font-weight: bold; cursor: pointer; font-size: 9pt; }
     </style>
 </head>
 <body>
@@ -90,217 +73,121 @@
             <h1 class="title">COUNTRYBALLS<br>GLOBAL DOMINANCE</h1>
             <div class="menu-buttons">
                 <button class="btn-menu" onclick="showScreen('select-screen')">Nuova Partita</button>
-                <button class="btn-menu" onclick="loadGame()">Carica Partita</button>
-                <button class="btn-menu" onclick="openModal('modal-difficulty')">Difficoltà</button>
                 <button class="btn-menu" onclick="openModal('modal-howto')">Come Giocare</button>
-                <button class="btn-menu" onclick="openModal('modal-settings')">Impostazioni</button>
             </div>
         </div>
-    </div>
-
-    <div id="modal-difficulty" class="modal">
-        <h2>Seleziona Difficoltà</h2>
-        <div class="modal-content">
-            <button class="btn-menu" style="font-size:12pt; margin-bottom:8px;" onclick="setDifficulty('Facile')">Facile (Risorse x1.5)</button>
-            <button class="btn-menu" style="font-size:12pt; margin-bottom:8px; background:#ff9800;" onclick="setDifficulty('Media')">Media (Standard)</button>
-            <button class="btn-menu" style="font-size:12pt; margin-bottom:8px; background:#f44336;" onclick="setDifficulty('Difficile')">Difficile (Aggressività IA)</button>
-            <button class="btn-menu" style="font-size:12pt; background:#9c27b0;" onclick="setDifficulty('Impossibile')">Impossibile (Crisi Continua)</button>
-        </div>
-        <p id="current-diff-label" style="text-align:center; font-weight:bold;">Attuale: Media</p>
-        <button class="close-modal" onclick="closeModal('modal-difficulty')">Chiudi</button>
     </div>
 
     <div id="modal-howto" class="modal">
-        <h2>Manuale del Presidente</h2>
-        <div class="modal-content">
-            <p><strong>Leader!</strong> Sviluppa lo Stato e colonizza il globo:</p>
-            <ul>
-                <li><strong>Sviluppo:</strong> Investi nei 6 rami nel pannello destro per guadagnare bonus continui.</li>
-                <li><strong>Accordi:</strong> Accetta le richieste estere per sbloccare capitali enormi.</li>
-                <li><strong>Guerra:</strong> Non attaccare mai chi ha più stelle (★) di te senza un alleato potente.</li>
-            </ul>
-        </div>
+        <h2>Come Giocare</h2>
+        <div class="modal-content"><p>Scegli uno stato, migliora le tue statistiche ed espandi la tua influenza globale cliccando sulle altre nazioni!</p></div>
         <button class="close-modal" onclick="closeModal('modal-howto')">Chiudi</button>
     </div>
 
-    <div id="modal-settings" class="modal">
-        <h2>Impostazioni</h2>
-        <div class="modal-content">
-            <button class="btn-menu" style="font-size:11pt;" onclick="clearSave()">Resetta tutti i salvataggi</button>
-        </div>
-        <button class="close-modal" onclick="closeModal('modal-settings')">Chiudi</button>
-    </div>
-
     <div id="select-screen" class="screen">
-        <h2 style="text-align:center; color:#e94560; font-size:24pt; margin:10px 0;">Scegli la tua Nazione</h2>
+        <h2 style="text-align:center; color:#e94560; margin:20px 0;">Scegli la tua Nazione</h2>
         <div class="select-layout">
-            <div class="select-box">
-                <h3 style="color:#fff; border-bottom:2px solid #e94560;">Nazioni Disponibili</h3>
-                <div id="nations-list"></div>
-            </div>
-            <div class="select-box">
-                <h3 style="color:#fff; border-bottom:2px solid #e94560;">Crea Stato Custom</h3>
-                <div class="form-group"><label>Nome dello Stato</label><input type="text" id="custom-name" placeholder="Es. Nuova Atlantide"></div>
-                <div class="form-group">
-                    <label>Colore Bandiera</label>
-                    <div class="flag-creator">
-                        <div class="color-pick" style="background:#ff3838;" onclick="pickColor('#ff3838')"></div>
-                        <div class="color-pick" style="background:#2ecc71;" onclick="pickColor('#2ecc71')"></div>
-                        <div class="color-pick" style="background:#3498db;" onclick="pickColor('#3498db')"></div>
-                        <div class="color-pick" style="background:#f1c40f;" onclick="pickColor('#f1c40f')"></div>
-                    </div>
-                </div>
-                <button class="btn-menu" style="width:100%; margin-top:20px; background:#4e9f3d; box-shadow:0 6px 0 #2e6f23" onclick="startCustomNation()">Fonda ed Entra</button>
-            </div>
+            <div class="select-box" id="nations-list"></div>
         </div>
-        <button class="btn-menu" style="position:absolute; bottom:15px; left:20px; font-size:12pt; padding:8px 20px;" onclick="showScreen('menu-screen')">Indietro</button>
     </div>
 
     <div id="game-screen" class="screen">
         <div class="top-bar">
             <div class="top-left">
-                <div class="player-ball-hud" id="hud-ball"><div class="ball-eyes"><div class="ball-eye" id="eye-l"></div><div class="ball-eye" id="eye-r"></div></div><div class="hud-sunglasses" id="acc-rich"></div><div class="hud-bandaid" id="acc-povero"></div></div>
-                <div><div id="hud-time" style="font-weight:bold; font-size:11pt; color:#ffd700;">Ora: 00:00 | Anno: 2026</div><div id="hud-stars" class="stars">★★★★★</div></div>
+                <div class="player-ball-hud" id="hud-ball"><div class="ball-eyes"><div class="ball-eye"></div><div class="ball-eye"></div></div></div>
+                <div><div id="hud-time" style="font-weight:bold; font-size:11pt; color:#ffd700;">Anno: 2026</div><div id="hud-stars" style="color:#ffd700;">★☆☆☆☆</div></div>
             </div>
             <div class="top-center">
-                <div class="counter-box"><div class="counter-title">Territorio</div><div class="counter-val" id="val-size">25.000 km²</div></div>
-                <div class="counter-box"><div class="counter-title">Popolazione</div><div class="counter-val" id="val-pop" style="color:#00bcd4;">3.400.000</div></div>
-                <div class="counter-box"><div class="counter-title">Budget</div><div class="counter-val" id="val-cash" style="color:#ffd700;">$500.000</div></div>
+                <div class="counter-box"><div class="counter-title">Territorio</div><div class="counter-val" id="val-size">0 km²</div></div>
+                <div class="counter-box"><div class="counter-title">Popolazione</div><div class="counter-val" id="val-pop" style="color:#00bcd4;">0</div></div>
+                <div class="counter-box"><div class="counter-title">Budget</div><div class="counter-val" id="val-cash" style="color:#ffd700;">$0</div></div>
             </div>
-            <div class="top-right"><div class="btn-circle" id="btn-speed" onclick="toggleSpeed()">1x</div><div class="btn-circle" onclick="openModal('modal-settings')">⚙️</div></div>
+            <div class="top-right"><div class="btn-circle" onclick="resetToMenu()">➔</div></div>
         </div>
         <div class="game-layout">
             <div class="map-wrapper">
-                <div class="continent-filters">
-                    <button class="btn-filter active" onclick="filterContinent('tutti')">Mondo Intero</button>
-                    <button class="btn-filter" onclick="filterContinent('america')">America</button>
-                    <button class="btn-filter" onclick="filterContinent('europa')">Europa</button>
-                    <button class="btn-filter" onclick="filterContinent('asia')">Asia</button>
-                </div>
                 <div class="map-container" id="world-map"></div>
             </div>
             <div class="control-panel">
-                <div class="panel-tab-title">Investimenti Strategici</div>
+                <div class="panel-tab-title">Investimenti</div>
                 <div id="investments-container"></div>
-                <button class="btn-menu" style="background:#53354a; font-size:12pt; box-shadow:0 4px 0 #2f1d2a; margin-top:auto;" onclick="saveGame()">Salva Partita</button>
-                <button class="btn-menu" style="background:#f44336; font-size:12pt; box-shadow:0 4px 0 #b22222; margin-top:10px;" onclick="resetToMenu()">Esci al Menu</button>
             </div>
         </div>
-    </div>
-
-    <div class="game-toast" id="toast-notification">
-        <div class="toast-header"><div class="player-ball-hud" id="toast-ball" style="width:30px; height:30px;"><div class="ball-eyes" style="top:7px; left:4px;"><div class="ball-eye" style="width:7px; height:7px;"></div><div class="ball-eye" style="width:7px; height:7px;"></div></div></div><span id="toast-title">Accordo Commerciale</span></div>
-        <div class="toast-body" id="toast-desc"></div>
-        <div class="toast-footer" id="toast-actions"></div>
     </div>
 
     <script>
         const canvas = document.getElementById('canvas-balls'); const ctx = canvas.getContext('2d');
-        let menuBalls = []; const ballColors = ['#ff3838', '#2ecc71', '#3498db', '#f1c40f', '#ffffff'];
+        let menuBalls = [];
         function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
         window.addEventListener('resize', resizeCanvas); resizeCanvas();
-        for(let i=0; i<10; i++) { menuBalls.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, radius: Math.random()*20+15, vx: (Math.random()-0.5)*3, vy: (Math.random()-0.5)*3, color: ballColors[Math.floor(Math.random()*ballColors.length)] }); }
-        function animateMenu() { if(document.getElementById('menu-screen').classList.contains('active')) { ctx.clearRect(0,0,canvas.width, canvas.height); menuBalls.forEach(b => { b.x += b.vx; b.y += b.vy; if(b.x-b.radius<0 || b.x+b.radius>canvas.width) b.vx*=-1; if(b.y-b.radius<0 || b.y+b.radius>canvas.height) b.vy*=-1; ctx.beginPath(); ctx.arc(b.x, b.y, b.radius, 0, Math.PI*2); ctx.fillStyle = b.color; ctx.fill(); ctx.lineWidth = 2; ctx.strokeStyle = '#fff'; ctx.stroke(); }); } requestAnimationFrame(animateMenu); }
+        for(let i=0; i<8; i++) { menuBalls.push({ x: Math.random()*canvas.width, y: Math.random()*canvas.height, radius: 20, vx: (Math.random()-0.5)*4, vy: (Math.random()-0.5)*4, color: '#e94560' }); }
+        function animateMenu() { if(document.getElementById('menu-screen').classList.contains('active')) { ctx.clearRect(0,0,canvas.width, canvas.height); menuBalls.forEach(b => { b.x += b.vx; b.y += b.vy; if(b.x-b.radius<0 || b.x+b.radius>canvas.width) b.vx*=-1; if(b.y-b.radius<0 || b.y+b.radius>canvas.height) b.vy*=-1; ctx.beginPath(); ctx.arc(b.x, b.y, b.radius, 0, Math.PI*2); ctx.fillStyle = b.color; ctx.fill(); ctx.strokeStyle = '#fff'; ctx.stroke(); }); } requestAnimationFrame(animateMenu); }
         animateMenu();
 
-        let gameDifficulty = "Media"; let timeSpeed = 1; let realSecondsElapsed = 0; let gameYear = 2026; let gameHour = 0; let selectedCustomColor = "#ff3838"; let currentContinentFilter = "tutti";
-        let playerCountry = { name: "Italia", isPlayer: true, stars: 1, size: 301340, pop: 59000000, cash: 500000, color: "#009246", continent: "europa", investments: { militar: 1, cure: 1, agric: 1, science: 1, mechanic: 1, ai: 1 } };
-        const ramiInvestimento = [ { id: 'militar', name: "Esercito & Difesa", cost: 50000 }, { id: 'cure', name: "Sanità Pubblica", cost: 40000 }, { id: 'agric', name: "Agricoltura Automatica", cost: 30000 }, { id: 'science', name: "Ricerca Spaziale", cost: 60000 }, { id: 'mechanic', name: "Fabbriche Pesanti", cost: 75000 }, { id: 'ai', name: "Algoritmi AI", cost: 100000 } ];
-        let worldNations = [];
-        const initialNationsBackup = [
+        let playerCountry = { name: "", size: 0, pop: 0, cash: 500000, color: "#fff", stars: 1, investments: { militar: 1, science: 1, economy: 1 } };
+        const rami = [{id:'militar', name:'Tecnologia Militare', cost:40000}, {id:'science', name:'Ricerca Scientifica', cost:30000}, {id:'economy', name:'Infrastrutture', cost:50000}];
+        let worldNations = [
             { name: "USA", stars: 5, size: 9834000, pop: 331000000, color: "#1a365d", continent: "america" },
-            { name: "Brasile", stars: 4, size: 8515767, pop: 213000000, color: "#009c3b", continent: "america" },
-            { name: "Messico", stars: 3, size: 1964375, pop: 128000000, color: "#118151", continent: "america" },
+            { name: "Brasile", stars: 3, size: 8515767, pop: 213000000, color: "#009c3b", continent: "america" },
             { name: "Francia", stars: 4, size: 643801, pop: 67000000, color: "#002395", continent: "europa" },
             { name: "Germania", stars: 4, size: 357022, pop: 83000000, color: "#111111", continent: "europa" },
-            { name: "Regno Unito", stars: 4, size: 242495, pop: 67000000, color: "#cf142b", continent: "europa" },
-            { name: "Cina", stars: 5, size: 9597000, pop: 1412000000, color: "#de2910", continent: "asia" },
-            { name: "Giappone", stars: 4, size: 377975, pop: 125000000, color: "#ffffff", continent: "asia" },
-            { name: "India", stars: 4, size: 3287263, pop: 1400000000, color: "#ff9933", continent: "asia" },
-            { name: "Australia", stars: 4, size: 7692024, pop: 25000000, color: "#00008b", continent: "oceania" }
+            { name: "Giappone", stars: 4, size: 377975, pop: 125000000, color: "#cf142b", continent: "asia" }
         ];
-        worldNations = JSON.parse(JSON.stringify(initialNationsBackup));
 
-        function showScreen(screenId) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById(screenId).classList.add('active'); if(screenId === 'select-screen') renderSelectionList(); if(screenId === 'game-screen') startupGameEngine(); }
+        function showScreen(id) { document.querySelectorAll('.screen').forEach(s => s.classList.remove('active')); document.getElementById(id).classList.add('active'); if(id==='select-screen') renderSelection(); if(id==='game-screen') initGame(); }
         function openModal(id) { document.getElementById(id).style.display = 'block'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
-        function setDifficulty(level) { gameDifficulty = level; document.getElementById('current-diff-label').innerText = "Attuale: " + level; playerCountry.cash = level === "Facile" ? 750000 : (level === "Impossibile" ? 200000 : 500000); }
 
-        function renderSelectionList() {
-            const container = document.getElementById('nations-list'); container.innerHTML = "";
+        function renderSelection() {
+            const c = document.getElementById('nations-list'); c.innerHTML = "<h3 style='color:#fff;'>Seleziona uno Stato per iniziare:</h3>";
             worldNations.forEach((nat, idx) => {
-                let item = document.createElement('div'); item.className = "nation-item";
-                item.innerHTML = `<div><div class="nation-flag-mock" style="background:${nat.color}"></div><strong>${nat.name}</strong></div><span>Gioca ➔</span>`;
-                item.onclick = () => { playerCountry.name = nat.name; playerCountry.size = nat.size; playerCountry.pop = nat.pop; playerCountry.color = nat.color; playerCountry.stars = nat.stars; playerCountry.continent = nat.continent; worldNations.splice(idx, 1); showScreen('game-screen'); };
-                container.appendChild(item);
+                let div = document.createElement('div'); div.className = "nation-item";
+                div.innerHTML = `<span><div class="nation-flag-mock" style="background:${nat.color}"></div><b>${nat.name}</b></span>`;
+                div.onclick = () => { playerCountry.name = nat.name; playerCountry.size = nat.size; playerCountry.pop = nat.pop; playerCountry.color = nat.color; playerCountry.stars = nat.stars; worldNations.splice(idx,1); showScreen('game-screen'); };
+                c.appendChild(div);
             });
         }
-        function pickColor(color) { selectedCustomColor = color; }
-        function startCustomNation() { let name = document.getElementById('custom-name').value.trim() || "Mio Stato"; playerCountry.name = name; playerCountry.color = selectedCustomColor; playerCountry.size = 100000; playerCountry.pop = 5000000; showScreen('game-screen'); }
 
-        let gameInterval;
-        function startupGameEngine() {
-            document.getElementById('hud-ball').style.backgroundColor = playerCountry.color; updateHUD(); buildWorldMap(); renderInvestments();
-            if(gameInterval) clearInterval(gameInterval);
-            gameInterval = setInterval(() => {
-                realSecondsElapsed += timeSpeed; gameHour += timeSpeed; if(gameHour >= 24) gameHour = 0;
-                if(realSecondsElapsed % 3 === 0) { playerCountry.cash += Math.floor((playerCountry.investments.agric * 2000 + playerCountry.investments.ai * 4000) * (gameDifficulty === "Facile" ? 1.5 : 1)); updateHUD(); if(Math.random() < 0.15) checkRandomEvents(); }
-                document.getElementById('hud-time').innerText = `Ora: ${gameHour}:00 | Anno: ${gameYear}`;
-            }, 1000);
+        let loop;
+        function initGame() {
+            document.getElementById('hud-ball').style.backgroundColor = playerCountry.color; updateHUD(); buildMap(); renderInvestments();
+            if(loop) clearInterval(loop);
+            loop = setInterval(() => { playerCountry.cash += 5000 * playerCountry.investments.economy; updateHUD(); }, 2000);
         }
 
         function updateHUD() {
             document.getElementById('val-size').innerText = playerCountry.size.toLocaleString() + " km²";
             document.getElementById('val-pop').innerText = playerCountry.pop.toLocaleString();
             document.getElementById('val-cash').innerText = "$" + playerCountry.cash.toLocaleString();
-            document.getElementById('hud-stars').innerText = "★".repeat(playerCountry.stars) + "☆".repeat(5-playerCountry.stars);
         }
-        function toggleSpeed() { timeSpeed = timeSpeed === 1 ? 3 : (timeSpeed === 3 ? 10 : 1); document.getElementById('btn-speed').innerText = timeSpeed + "x"; }
-        function filterContinent(c) { currentContinentFilter = c; buildWorldMap(); }
 
-        function buildWorldMap() {
-            const map = document.getElementById('world-map'); map.innerHTML = "";
-            if(currentContinentFilter === "tutti" || playerCountry.continent === currentContinentFilter) {
-                let pCell = document.createElement('div'); pCell.className = "map-cell player-controlled";
-                pCell.innerHTML = `<div class="cell-flag" style="background:${playerCountry.color}"></div><div class="cell-name">${playerCountry.name} (TU)</div>`;
-                map.appendChild(pCell);
-            }
+        function buildMap() {
+            const m = document.getElementById('world-map'); m.innerHTML = "";
+            let p = document.createElement('div'); p.className = "map-cell player-controlled";
+            p.innerHTML = `<div class="cell-flag" style="background:${playerCountry.color}"></div><div class="cell-name">${playerCountry.name} (Tu)</div>`;
+            m.appendChild(p);
             worldNations.forEach((nat, idx) => {
-                if(currentContinentFilter !== "tutti" && nat.continent !== currentContinentFilter) return;
                 let cell = document.createElement('div'); cell.className = "map-cell";
                 cell.innerHTML = `<div class="cell-flag" style="background:${nat.color}"></div><div class="cell-name">${nat.name}</div><div class="cell-stars">${'★'.repeat(nat.stars)}</div>`;
                 cell.onclick = () => {
-                    let cost = nat.stars * 80000;
-                    if(confirm(`Vuoi comprare/annettere commercialmente ${nat.name} per $${cost.toLocaleString()}?`)) {
-                        if(playerCountry.cash >= cost) { playerCountry.cash -= cost; playerCountry.size += nat.size; playerCountry.pop += nat.pop; worldNations.splice(idx, 1); buildWorldMap(); updateHUD(); } else { alert("Fondi insufficienti!"); }
-                    }
+                    let cost = nat.stars * 90000;
+                    if(playerCountry.cash >= cost) { if(confirm(`Vuoi annettere ${nat.name} per $${cost}?`)) { playerCountry.cash -= cost; playerCountry.size += nat.size; playerCountry.pop += nat.pop; worldNations.splice(idx,1); buildMap(); updateHUD(); } } else { alert("Fondi insufficienti!"); }
                 };
-                map.appendChild(cell);
+                m.appendChild(cell);
             });
         }
 
         function renderInvestments() {
-            const container = document.getElementById('investments-container'); container.innerHTML = "";
-            ramiInvestimento.forEach(inv => {
-                let lvl = playerCountry.investments[inv.id]; let cost = inv.cost * lvl;
+            const c = document.getElementById('investments-container'); c.innerHTML = "";
+            rami.forEach(r => {
+                let lvl = playerCountry.investments[r.id]; let cost = r.cost * lvl;
                 let card = document.createElement('div'); card.className = "investment-card";
-                card.innerHTML = `<div class="inv-info"><span class="inv-name">${inv.name}</span><span class="inv-level">Livello: ${lvl}</span></div><button class="btn-invest" onclick="buyInvestment('${inv.id}', ${cost})">Migliora ($${cost})</button>`;
-                container.appendChild(card);
+                card.innerHTML = `<div class="inv-info"><span class="inv-name">${r.name}</span><span class="inv-level">Lvl: ${lvl}</span></div><button class="btn-invest" onclick="buyInv('${r.id}', ${cost})">Espandi ($${cost})</button>`;
+                c.appendChild(card);
             });
         }
-        function buyInvestment(id, cost) { if(playerCountry.cash >= cost) { playerCountry.cash -= cost; playerCountry.investments[id]++; renderInvestments(); updateHUD(); } else { alert("Soldi insufficienti!"); } }
-
-        function checkRandomEvents() {
-            let randomNat = worldNations[Math.floor(Math.random() * worldNations.length)]; if(!randomNat) return;
-            document.getElementById('toast-desc').innerText = `${randomNat.name} ti propone un patto commerciale. Guadagni subito $80.000!`;
-            document.getElementById('toast-actions').innerHTML = `<button class="btn-toast" style="background:#4e9f3d; color:#fff;" onclick="playerCountry.cash+=80000; closeToast(); updateHUD();">Accetta</button>`;
-            document.getElementById('toast-notification').style.display = "block";
-        }
-        function closeToast() { document.getElementById('toast-notification').style.display = "none"; }
-        function saveGame() { localStorage.setItem('cb_save', JSON.stringify({playerCountry, worldNations})); alert("Salvato!"); }
-        function loadGame() { let s = localStorage.getItem('cb_save'); if(s) { let p = JSON.parse(s); playerCountry = p.playerCountry; worldNations = p.worldNations; showScreen('game-screen'); } else { alert("Nessun salvataggio."); } }
-        function resetToMenu() { if(gameInterval) clearInterval(gameInterval); worldNations = JSON.parse(JSON.stringify(initialNationsBackup)); showScreen('menu-screen'); }
-        function clearSave() { localStorage.removeItem('cb_save'); alert("Salvataggio pulito."); resetToMenu(); }
+        function buyInv(id, cost) { if(playerCountry.cash >= cost) { playerCountry.cash -= cost; playerCountry.investments[id]++; renderInvestments(); updateHUD(); } }
+        function resetToMenu() { clearInterval(loop); location.reload(); }
     </script>
 </body>
 </html>
